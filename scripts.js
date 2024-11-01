@@ -31,12 +31,10 @@ class Field{
             for(var j = 0; j < this.cols; j++){
                 var cellContent = this.field[i][j];
 
-                // Verifica se o jogador está na posição atual
                 if (player && player.x === j && player.y === i) {
                     cellContent += player.face;
                 }
 
-                // Verifica se algum NPC está na posição atual
                 npcs.forEach(function(npc){
                     if (npc.x === j && npc.y === i) {
                         cellContent += npc.face;
@@ -94,7 +92,6 @@ class Character{
             this.table.field[this.y][this.x] = '';
             this.table.drawField();
 
-            // Verifica colisão após o movimento
             if (typeof checkCollision === 'function' && npcs.length > 0 && player) {
                 checkCollision(player, npcs);
             }
@@ -133,24 +130,19 @@ class Npc extends Character{
         }
     }
 
-    // Sobrescrevendo o método setPosition para NPCs
     setPosition(x, y){
         if(this.table.field[y][x] !== '@'){
-            // Verifica se outro NPC está na célula de destino
             for(var i = 0; i < npcs.length; i++){
                 if(npcs[i] !== this && npcs[i].x === x && npcs[i].y === y){
-                    // A célula está ocupada por outro NPC
                     return false;
                 }
             }
-            // Movimento permitido
             this.table.field[this.y][this.x] = '';
             this.x = x;
             this.y = y;
             this.table.field[this.y][this.x] = '';
             this.table.drawField();
 
-            // Verifica colisão após o movimento
             if (typeof checkCollision === 'function' && npcs.length > 0 && player) {
                 checkCollision(player, npcs);
             }
@@ -166,10 +158,8 @@ class Npc extends Character{
 }
 
 function NpcSpawn(){
-    // Cria um novo NPC imediatamente
     npcs.push(new Npc(field));
 
-    // Cria novos NPCs a cada 3 segundos
     setInterval(function(){
         npcs.push(new Npc(field));
     }, 3000);
