@@ -1,6 +1,5 @@
 function showJumpscare() {
 
-    // Cria um elemento div que cobre toda a tela
     var jumpscareDiv = document.createElement('div');
     jumpscareDiv.style.position = 'fixed';
     jumpscareDiv.style.top = '0';
@@ -13,10 +12,8 @@ function showJumpscare() {
     jumpscareDiv.style.backgroundPosition = 'center';
     jumpscareDiv.style.backgroundRepeat = 'no-repeat';
 
-    // Adiciona o div ao corpo da página
     document.body.appendChild(jumpscareDiv);
 
-    // Reproduz o áudio de jumpscare
     var audio = new Audio('jumpscare.mp3');
     audio.play();
 }
